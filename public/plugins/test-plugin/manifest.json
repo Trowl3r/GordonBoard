@@ -1,0 +1,10 @@
+{
+    "id": "test-plugin",
+    "name": "Test Plugin",
+    "version": "1.0.0",
+    "description": "This is just a Test Plugin",
+    "author": "Trowl3r",
+    "entrypoint": "script.js",
+    "widgetUrl": "/plugins/test-plugin/widget.html",
+    "pageUrl": "/plugins/test-plugin/index.html"
+}
