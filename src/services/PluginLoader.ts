@@ -4,7 +4,6 @@ type PluginLoadCallback = (plugins: PluginManifest[]) => void;
 
 class PluginLoader {
   private plugins: Map<string, PluginManifest> = new Map();
-  private loadedPlugins: Map<string, any> = new Map();
   private callbacks: PluginLoadCallback[] = [];
   private isInitialized: boolean = false;
 
@@ -16,27 +15,29 @@ class PluginLoader {
   private async initPlugins() {
     console.log("Scanning for plugins...");
     try {
-      // TODO: Replace with actual plugin logic
-      const pluginUrls = [
-        "/plugins/test-plugin/manifest.json",
-        "/plugins/react-test-plugin/manifest.json",
-      ];
+      // TODO: Implement plugin fetch from backend
+      // const pluginUrls = [];
 
-      const pluginPromises = pluginUrls.map(async (url) => {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(
-            `Failed to load plugin manifest from ${url}: ${res.status}`
-          );
-        }
-        return res.json();
-      });
+      // const pluginPromises = pluginUrls.map(async (url) => {
+      //   const res = await fetch(url);
+      //   if (!res.ok) {
+      //     throw new Error(
+      //       `Failed to load plugin manifest from ${url}: ${res.status}`
+      //     );
+      //   }
+      //   return res.json();
+      // });
 
-      const manifests = await Promise.all(pluginPromises);
+      // const manifests = await Promise.all(pluginPromises);
+      
+      // Hardcoded manifest to test plugin load. Wil be removed later.
+      const manifests: PluginManifest[] = [];
 
       for (const manifest of manifests) {
         await this.registerPlugin(manifest);
       }
+
+      this.isInitialized = true;
       this.notifyCallbacks();
     } catch (err) {
       console.error(err);
@@ -66,15 +67,6 @@ class PluginLoader {
     if (!manifest) {
       throw new Error(`Plugin ${pluginId} not found`);
     }
-
-    if (this.loadedPlugins.has(pluginId)) {
-      return this.loadedPlugins.get(pluginId);
-    }
-
-    // const entryPoint = await import(manifest.entryPoint);
-
-    // this.loadedPlugins.set(pluginId, entryPoint);
-    // return entryPoint;
   }
 
   getPluginManifest(pluginId: string): PluginManifest | undefined {

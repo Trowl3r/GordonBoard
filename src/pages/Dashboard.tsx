@@ -52,7 +52,7 @@ function Dashboard() {
               {plugins.map((plugin) => (
                 <DraggableCard key={plugin.id} id={plugin.id}>
                   <PluginWidget
-                    src={plugin.widgetUrl}
+                    id={plugin.id}
                     title={plugin.name}
                   />
                 </DraggableCard>
