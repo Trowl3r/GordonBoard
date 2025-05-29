@@ -8,7 +8,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Dashboard />} />
-      <Route path="*" element={<PluginPage />} />
+      <Route path="/:pluginId" element={<PluginPage />} />
     </Route>
   )
 )

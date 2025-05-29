@@ -1,17 +1,17 @@
 import { useRef } from "react";
-
-// TODO: outsource this
-const BACKEND_URL = "http://localhost:8000/plugin";
+import { getWidgetAdress} from "../api/ApiPath";
 
 function PluginWidget({
-  id,
   title,
+  src
 }: {
-  id: string;
   title: string;
+  src: string;
 }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
+  const widgetSrc = getWidgetAdress(src);
+  
   return (
     <div
       className="plugin-widget"
@@ -23,7 +23,7 @@ function PluginWidget({
     >
       <iframe
         ref={iframeRef}
-        src={`${BACKEND_URL}/${id}/widget.html`}
+        src={widgetSrc}
         style={{
           width: "100%",
           height: "100%",

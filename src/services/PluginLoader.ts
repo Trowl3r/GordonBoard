@@ -1,3 +1,4 @@
+import PluginApi from "../api/PluginApi";
 import type { PluginManifest } from "../types/plugin";
 
 type PluginLoadCallback = (plugins: PluginManifest[]) => void;
@@ -15,23 +16,8 @@ class PluginLoader {
   private async initPlugins() {
     console.log("Scanning for plugins...");
     try {
-      // TODO: Implement plugin fetch from backend
-      // const pluginUrls = [];
-
-      // const pluginPromises = pluginUrls.map(async (url) => {
-      //   const res = await fetch(url);
-      //   if (!res.ok) {
-      //     throw new Error(
-      //       `Failed to load plugin manifest from ${url}: ${res.status}`
-      //     );
-      //   }
-      //   return res.json();
-      // });
-
-      // const manifests = await Promise.all(pluginPromises);
-      
       // Hardcoded manifest to test plugin load. Wil be removed later.
-      const manifests: PluginManifest[] = [];
+      const manifests = await new PluginApi().getPlugins();
 
       for (const manifest of manifests) {
         await this.registerPlugin(manifest);
